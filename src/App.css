@@ -1,0 +1,94 @@
+input{
+    border-radius: 5px;
+    outline: none;
+    padding: 10px 5px;
+    text-align: right;
+    border: 1px solid black;
+}
+.number{
+    box-sizing: border-box;
+}
+input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
+    display: none;
+}
+.App {
+    background-color: rgb(255, 247, 238);
+    width: 100%;
+    height: 100%;
+}
+.header{
+    width: 100%;
+    height: 80px;
+    background-color: rgb(4, 0, 65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.corpo_container{
+    width: 100vw;
+    height: 85%;
+    padding-inline: 23vw;
+}
+.corpo{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 700px;
+    padding: 15px;
+    border-radius: 0 0 15px 15px;
+}
+.corpo_title{
+    margin-bottom: 20px;
+}
+.header_corpo{
+    margin-bottom: 20px;
+}
+.conversor_app{
+    background-color: rgb(233, 233, 233);
+    padding: 15px;
+}
+.valor_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.valor_box{
+
+}
+.h3_title_container{
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.h3_title{
+    color: rgb(92, 92, 92);
+}
+.moedas_conversor{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 20px;
+}
+select{
+    width: 200px;
+    padding: 10px;
+}
+.change_button_container{
+
+}
+.change_button{
+    transform: translate(0 , 16px);
+    background-color: rgb(0, 0, 102);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+.equivalente_descricao_container{
+    text-align: center;
+}
+.equivalente_descricao{
+    font-size: 1.3em;
+}
