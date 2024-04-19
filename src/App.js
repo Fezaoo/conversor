@@ -1,8 +1,32 @@
 import './App.css';
 import { useState } from 'react';
 import { FaExchangeAlt } from "react-icons/fa";
+import { MdOutlineArrowForwardIos } from "react-icons/md";
+import api from './services/api';
+import { useEffect } from 'react';
 
 function App() {
+  const [Moeda_padrao, setMoeda_padrao] = useState("USD")
+  const [Moeda_convertida, setMoeda_convertida] = useState("BRL")
+  const [cotacao, setCotacao] = useState(0)
+  const [Valor, setValor] = useState(1.00)
+
+  async function converter() {
+    try {
+      const response = await api.get(`/${Moeda_padrao}-${Moeda_convertida}`)
+      console.log(response)
+      const data = response.data
+      const cotacao = data[0]['bid']
+      setCotacao(cotacao)
+    } catch {
+    }
+  }
+
+  useEffect(() => {
+    converter()
+  }, [Moeda_padrao, Moeda_convertida]);
+
+
   return (
     <div className="App">
       <header className='header'>
@@ -28,7 +52,7 @@ function App() {
                     Valor
                   </h3>
                 </div>
-                <input type='number' ></input>
+                <input type='number' value={Valor} onChange={(e) => {setValor(e.target.value)}}/>
               </div>
             </div>
 
@@ -39,14 +63,60 @@ function App() {
                     Converter de
                   </h3>
                 </div>
-                <select className='select_moeda de_moeda' >
-
+                <select className='select_moeda de_moeda' defaultValue={Moeda_padrao} onChange={(e) => {setMoeda_padrao(e.target.value) }}>
+                  <option className='opcao_moeda' value='USD'>USD - Dólar Americano</option>
+                  <option className='opcao_moeda' value='EUR'>EUR - Euro</option>
+                  <option className='opcao_moeda' value='JPY'>JPY - Iene Japonês</option>
+                  <option className='opcao_moeda' value='GBP'>GBP - Libra Esterlina</option>
+                  <option className='opcao_moeda' value='AUD'>AUD - Dólar Australiano</option>
+                  <option className='opcao_moeda' value='CAD'>CAD - Dólar Canadense</option>
+                  <option className='opcao_moeda' value='CHF'>CHF - Franco Suíço</option>
+                  <option className='opcao_moeda' value='CNY'>CNY - Yuan Chinês</option>
+                  <option className='opcao_moeda' value='SEK'>SEK - Coroa Sueca</option>
+                  <option className='opcao_moeda' value='NZD'>NZD - Dólar Neozelandês</option>
+                  <option className='opcao_moeda' value='MXN'>MXN - Peso Mexicano</option>
+                  <option className='opcao_moeda' value='SGD'>SGD - Dólar de Singapura</option>
+                  <option className='opcao_moeda' value='HKD'>HKD - Dólar de Hong Kong</option>
+                  <option className='opcao_moeda' value='NOK'>NOK - Coroa Norueguesa</option>
+                  <option className='opcao_moeda' value='KRW'>KRW - Won Sul-Coreano</option>
+                  <option className='opcao_moeda' value='TRY'>TRY - Lira Turca</option>
+                  <option className='opcao_moeda' value='RUB'>RUB - Rublo Russo</option>
+                  <option className='opcao_moeda' value='INR'>INR - Rúpia Indiana</option>
+                  <option className='opcao_moeda' value='BRL'>BRL - Real Brasileiro</option>
+                  <option className='opcao_moeda' value='ZAR'>ZAR - Rand Sul-Africano</option>
+                  <option className='opcao_moeda' value='DKK'>DKK - Coroa Dinamarquesa</option>
+                  <option className='opcao_moeda' value='PLN'>PLN - Złoty Polonês</option>
+                  <option className='opcao_moeda' value='THB'>THB - Baht Tailandês</option>
+                  <option className='opcao_moeda' value='IDR'>IDR - Rupia Indonésia</option>
+                  <option className='opcao_moeda' value='HUF'>HUF - Florim Húngaro</option>
+                  <option className='opcao_moeda' value='CZK'>CZK - Coroa Tcheca</option>
+                  <option className='opcao_moeda' value='ILS'>ILS - Novo Shekel Israelense</option>
+                  <option className='opcao_moeda' value='CLP'>CLP - Peso Chileno</option>
+                  <option className='opcao_moeda' value='PHP'>PHP - Peso Filipino</option>
+                  <option className='opcao_moeda' value='AED'>AED - Dirham dos Emirados Árabes Unidos</option>
+                  <option className='opcao_moeda' value='SAR'>SAR - Riyal Saudita</option>
+                  <option className='opcao_moeda' value='MYR'>MYR - Ringgit Malaio</option>
+                  <option className='opcao_moeda' value='RON'>RON - Leu Romeno</option>
+                  <option className='opcao_moeda' value='COP'>COP - Peso Colombiano</option>
+                  <option className='opcao_moeda' value='ARS'>ARS - Peso Argentino</option>
+                  <option className='opcao_moeda' value='TWD'>TWD - Novo Dólar Taiwanês</option>
+                  <option className='opcao_moeda' value='NPR'>NPR - Rúpia Nepalesa</option>
+                  <option className='opcao_moeda' value='VND'>VND - Dong Vietnamita</option>
+                  <option className='opcao_moeda' value='EGP'>EGP - Libra Egípcia</option>
+                  <option className='opcao_moeda' value='PKR'>PKR - Rupia Paquistanesa</option>
+                  <option className='opcao_moeda' value='BDT'>BDT - Taka de Bangladesh</option>
+                  <option className='opcao_moeda' value='IQD'>IQD - Dinar Iraquiano</option>
+                  <option className='opcao_moeda' value='KWD'>KWD - Dinar Kuwaitiano</option>
+                  <option className='opcao_moeda' value='DZD'>DZD - Dinar Argelino</option>
+                  <option className='opcao_moeda' value='OMR'>OMR - Rial Omanense</option>
+                  <option className='opcao_moeda' value='QAR'>QAR - Riyal Catariano</option>
+                  <option className='opcao_moeda' value='MAD'>MAD - Dirham Marroquino</option>
                 </select>
               </div>
               <div className='change_button_container' >
-              <button className='change_button'>
-                <FaExchangeAlt />
-              </button>
+                <button className='change_button'>
+                  <FaExchangeAlt />
+                </button>
               </div>
               <div className='conversor_container'>
 
@@ -56,14 +126,73 @@ function App() {
                   </h3>
                 </div>
 
-                <select className='select_moeda para_moeda' >
-
+                <select className='select_moeda para_moeda' defaultValue={Moeda_convertida} onChange={(e) => { setMoeda_convertida(e.target.value)}}>
+                  <option className='opcao_moeda' value='USD'>USD - Dólar Americano</option>
+                  <option className='opcao_moeda' value='EUR'>EUR - Euro</option>
+                  <option className='opcao_moeda' value='JPY'>JPY - Iene Japonês</option>
+                  <option className='opcao_moeda' value='GBP'>GBP - Libra Esterlina</option>
+                  <option className='opcao_moeda' value='AUD'>AUD - Dólar Australiano</option>
+                  <option className='opcao_moeda' value='CAD'>CAD - Dólar Canadense</option>
+                  <option className='opcao_moeda' value='CHF'>CHF - Franco Suíço</option>
+                  <option className='opcao_moeda' value='CNY'>CNY - Yuan Chinês</option>
+                  <option className='opcao_moeda' value='SEK'>SEK - Coroa Sueca</option>
+                  <option className='opcao_moeda' value='NZD'>NZD - Dólar Neozelandês</option>
+                  <option className='opcao_moeda' value='MXN'>MXN - Peso Mexicano</option>
+                  <option className='opcao_moeda' value='SGD'>SGD - Dólar de Singapura</option>
+                  <option className='opcao_moeda' value='HKD'>HKD - Dólar de Hong Kong</option>
+                  <option className='opcao_moeda' value='NOK'>NOK - Coroa Norueguesa</option>
+                  <option className='opcao_moeda' value='KRW'>KRW - Won Sul-Coreano</option>
+                  <option className='opcao_moeda' value='TRY'>TRY - Lira Turca</option>
+                  <option className='opcao_moeda' value='RUB'>RUB - Rublo Russo</option>
+                  <option className='opcao_moeda' value='INR'>INR - Rúpia Indiana</option>
+                  <option className='opcao_moeda' value='BRL'>BRL - Real Brasileiro</option>
+                  <option className='opcao_moeda' value='ZAR'>ZAR - Rand Sul-Africano</option>
+                  <option className='opcao_moeda' value='DKK'>DKK - Coroa Dinamarquesa</option>
+                  <option className='opcao_moeda' value='PLN'>PLN - Złoty Polonês</option>
+                  <option className='opcao_moeda' value='THB'>THB - Baht Tailandês</option>
+                  <option className='opcao_moeda' value='IDR'>IDR - Rupia Indonésia</option>
+                  <option className='opcao_moeda' value='HUF'>HUF - Florim Húngaro</option>
+                  <option className='opcao_moeda' value='CZK'>CZK - Coroa Tcheca</option>
+                  <option className='opcao_moeda' value='ILS'>ILS - Novo Shekel Israelense</option>
+                  <option className='opcao_moeda' value='CLP'>CLP - Peso Chileno</option>
+                  <option className='opcao_moeda' value='PHP'>PHP - Peso Filipino</option>
+                  <option className='opcao_moeda' value='AED'>AED - Dirham dos Emirados Árabes Unidos</option>
+                  <option className='opcao_moeda' value='SAR'>SAR - Riyal Saudita</option>
+                  <option className='opcao_moeda' value='MYR'>MYR - Ringgit Malaio</option>
+                  <option className='opcao_moeda' value='RON'>RON - Leu Romeno</option>
+                  <option className='opcao_moeda' value='COP'>COP - Peso Colombiano</option>
+                  <option className='opcao_moeda' value='ARS'>ARS - Peso Argentino</option>
+                  <option className='opcao_moeda' value='TWD'>TWD - Novo Dólar Taiwanês</option>
+                  <option className='opcao_moeda' value='NPR'>NPR - Rúpia Nepalesa</option>
+                  <option className='opcao_moeda' value='VND'>VND - Dong Vietnamita</option>
+                  <option className='opcao_moeda' value='EGP'>EGP - Libra Egípcia</option>
+                  <option className='opcao_moeda' value='PKR'>PKR - Rupia Paquistanesa</option>
+                  <option className='opcao_moeda' value='BDT'>BDT - Taka de Bangladesh</option>
+                  <option className='opcao_moeda' value='IQD'>IQD - Dinar Iraquiano</option>
+                  <option className='opcao_moeda' value='KWD'>KWD - Dinar Kuwaitiano</option>
+                  <option className='opcao_moeda' value='DZD'>DZD - Dinar Argelino</option>
+                  <option className='opcao_moeda' value='OMR'>OMR - Rial Omanense</option>
+                  <option className='opcao_moeda' value='QAR'>QAR - Riyal Catariano</option>
+                  <option className='opcao_moeda' value='MAD'>MAD - Dirham Marroquino</option>
                 </select>
               </div>
             </div>
-            <div className='equivalente_descricao_container'>
-              <p className='equivalente_descricao'>
-                1 USD equivale a 5 BRL
+            <div className='resultado_container'>
+              <h3 className='resultado_title'>
+                Resultado da Conversão
+              </h3>
+              <div className='resultado_conversao_title'>
+                <h3>
+                  {Moeda_padrao} <MdOutlineArrowForwardIos size={16}/> {Moeda_convertida}
+                </h3>
+              </div>
+              <div className='resultado_conversao_container'>
+                <div className='resultado_conversao'>
+                  {(cotacao * Valor).toFixed(2)}
+                </div>
+              </div>
+              <p className='resultado_descricao'>
+                1 USD equivale a 5
               </p>
             </div>
           </section>
