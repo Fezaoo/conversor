@@ -60,8 +60,9 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
     margin-bottom: 20px;
 }
 .conversor_app{
-    background-color: rgb(233, 233, 233);
-    padding: 15px;
+    background-color: rgb(223, 223, 223);
+    border-radius: 20px;
+    padding: 25px;
 }
 .valor_container{
     display: flex;
@@ -69,9 +70,7 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
     align-items: center;
     margin-bottom: 15px;
 }
-.valor_box{
 
-}
 .h3_title_container{
     display: block;
     text-align: left;
@@ -87,9 +86,6 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
     margin-bottom: 20px;
 }
 
-.change_button_container{
-
-}
 .change_button{
     transform: translate(0 , 16px);
     background-color: rgb(0, 0, 102);
@@ -113,15 +109,17 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
     align-items: center;
 }
 .resultado_conversao{
-    display: flex;
     font-weight: bold;
-    text-align: center;
     font-size: 1.2em;
     border: 2px solid black;
     border-radius: 6px;
+    padding-inline: 2px;
     margin: 10px 0;
-    width: 100px;
+    min-width: 100px;
+    text-align: right;
+    background-color: white;
 }
+
 .resultado_descricao{
     font-size: 1.3em;
 }

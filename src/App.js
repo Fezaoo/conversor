@@ -4,11 +4,12 @@ import { FaExchangeAlt } from "react-icons/fa";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import api from './services/api';
 import { useEffect } from 'react';
+import coins_options from './assets/coin_options';
 
 function App() {
   const [Moeda_padrao, setMoeda_padrao] = useState("USD")
   const [Moeda_convertida, setMoeda_convertida] = useState("BRL")
-  const [cotacao, setCotacao] = useState(0)
+  const [Cotacao, setCotacao] = useState(0)
   const [Valor, setValor] = useState(1.00)
 
   async function converter() {
@@ -21,6 +22,13 @@ function App() {
     } catch {
     }
   }
+
+  function change_coins () {
+    const aux = Moeda_padrao
+    setMoeda_padrao(Moeda_convertida)
+    setMoeda_convertida(aux)    
+  }
+
 
   useEffect(() => {
     converter()
@@ -45,16 +53,7 @@ function App() {
             </p>
           </section>
           <section className='conversor_app'>
-            <div className='valor_container'>
-              <div className='valor_box'>
-                <div className='h3_title_container'>
-                  <h3 className='h3_title'>
-                    Valor
-                  </h3>
-                </div>
-                <input type='number' value={Valor} onChange={(e) => {setValor(e.target.value)}}/>
-              </div>
-            </div>
+
 
             <div className='moedas_conversor'>
               <div className='conversor_container'>
@@ -63,7 +62,7 @@ function App() {
                     Converter de
                   </h3>
                 </div>
-                <select className='select_moeda de_moeda' defaultValue={Moeda_padrao} onChange={(e) => {setMoeda_padrao(e.target.value) }}>
+                <select className='select_moeda de_moeda' value={Moeda_padrao} defaultValue={Moeda_padrao} onChange={(e) => {setMoeda_padrao(e.target.value) }}>
                   <option className='opcao_moeda' value='USD'>USD - Dólar Americano</option>
                   <option className='opcao_moeda' value='EUR'>EUR - Euro</option>
                   <option className='opcao_moeda' value='JPY'>JPY - Iene Japonês</option>
@@ -114,7 +113,7 @@ function App() {
                 </select>
               </div>
               <div className='change_button_container' >
-                <button className='change_button'>
+                <button className='change_button' onClick={change_coins}>
                   <FaExchangeAlt />
                 </button>
               </div>
@@ -126,7 +125,7 @@ function App() {
                   </h3>
                 </div>
 
-                <select className='select_moeda para_moeda' defaultValue={Moeda_convertida} onChange={(e) => { setMoeda_convertida(e.target.value)}}>
+                <select className='select_moeda para_moeda' value={Moeda_convertida} defaultValue={Moeda_convertida} onChange={(e) => { setMoeda_convertida(e.target.value) }}>
                   <option className='opcao_moeda' value='USD'>USD - Dólar Americano</option>
                   <option className='opcao_moeda' value='EUR'>EUR - Euro</option>
                   <option className='opcao_moeda' value='JPY'>JPY - Iene Japonês</option>
@@ -177,6 +176,16 @@ function App() {
                 </select>
               </div>
             </div>
+            <div className='valor_container'>
+              <div className='valor_box'>
+                <div className='h3_title_container'>
+                  <h3 className='h3_title'>
+                    Valor
+                  </h3>
+                </div>
+                <input type='number' value={Valor} onChange={(e) => {setValor(e.target.value)}}/>
+              </div>
+            </div>
             <div className='resultado_container'>
               <h3 className='resultado_title'>
                 Resultado da Conversão
@@ -188,11 +197,11 @@ function App() {
               </div>
               <div className='resultado_conversao_container'>
                 <div className='resultado_conversao'>
-                  {(cotacao * Valor).toFixed(2)}
+                  <p className='cotacao_valor'>{(Cotacao * Valor).toFixed(3)}</p>
                 </div>
               </div>
               <p className='resultado_descricao'>
-                1 USD equivale a 5
+                1 {Moeda_padrao} equivale a {(Cotacao * Valor).toFixed(3)} {Moeda_convertida}
               </p>
             </div>
           </section>
