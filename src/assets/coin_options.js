@@ -1,9 +1,12 @@
 import React from "react";
 
-function coins_options () {
+
+
+
+function CoinsOptions ({Moeda, setMoeda}) {
 
     return (
-        <optgroup> 
+        <select className="select_moeda para_moeda" value={Moeda} defaultValue={Moeda} onChange={(e) => {setMoeda(e.target.value)}}>
         <option className='opcao_moeda' value='USD'>USD - Dólar Americano</option>
         <option className='opcao_moeda' value='EUR'>EUR - Euro</option>
         <option className='opcao_moeda' value='JPY'>JPY - Iene Japonês</option>
@@ -51,8 +54,8 @@ function coins_options () {
         <option className='opcao_moeda' value='OMR'>OMR - Rial Omanense</option>
         <option className='opcao_moeda' value='QAR'>QAR - Riyal Catariano</option>
         <option className='opcao_moeda' value='MAD'>MAD - Dirham Marroquino</option>
-        </optgroup>
+        </select>
     ) 
 }
 
-export default coins_options;
+export default CoinsOptions;
