@@ -5,7 +5,8 @@ import { MdOutlineArrowForwardIos } from "react-icons/md";
 import api from './services/api';
 import { useEffect } from 'react';
 import CoinsOptions from './assets/coin_options';
-import { VscLoading } from "react-icons/vsc";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 
 function App() {
   const [Moeda_padrao, setMoeda_padrao] = useState("USD")
@@ -107,7 +108,7 @@ function App() {
                 </h3>
                 <div className='loading_container_test'>
                   <div >
-                  <VscLoading className={`loading_none ${Loading ? 'loading loading_animation':''}`}/>
+                  <AiOutlineLoading3Quarters className={`loading_none ${Loading ? 'loading loading_animation':''}`}/>
                   </div>
                 </div>
               </div>
