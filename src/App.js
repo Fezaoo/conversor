@@ -5,23 +5,34 @@ import { MdOutlineArrowForwardIos } from "react-icons/md";
 import api from './services/api';
 import { useEffect } from 'react';
 import CoinsOptions from './assets/coin_options';
+import { VscLoading } from "react-icons/vsc";
 
 function App() {
   const [Moeda_padrao, setMoeda_padrao] = useState("USD")
   const [Moeda_convertida, setMoeda_convertida] = useState("BRL")
   const [Cotacao, setCotacao] = useState(0)
   const [Valor, setValor] = useState(1.00)
+  const [Loading, setLoading] = useState(false)
+
 
   async function converter() {
-    try {
-      const response = await api.get(`/${Moeda_padrao}-${Moeda_convertida}`)
-      console.log(response)
-      const data = response.data
-      const cotacao = data[0]['bid']
-      setCotacao(cotacao)
-    } catch {
+    if (Moeda_padrao !== Moeda_convertida) {
+      try {
+        setLoading(true)
+        const response = await api.get(`/${Moeda_padrao}-${Moeda_convertida}`)
+        console.log(response)
+        const data = response.data
+        const cotacao = data[0]['bid']
+        setCotacao(cotacao)
+        setLoading(false)
+      } catch {
+      }
+    } else {
+      alert('Conversão inválida, duas moedas iguais!')
+      setMoeda_padrao('USD')
+      setMoeda_convertida('BRL')
     }
-  }
+    }
 
   function change_coins () {
     const aux = Moeda_padrao
@@ -90,9 +101,16 @@ function App() {
               </div>
             </div>
             <div className='resultado_container'>
-              <h3 className='resultado_title'>
-                Resultado da Conversão
-              </h3>
+              <div className='resultado_title_container'>
+                <h3 className='resultado_title'>
+                  Resultado da Conversão
+                </h3>
+                <div className='loading_container_test'>
+                  <div >
+                  <VscLoading className={`loading_none ${Loading ? 'loading loading_animation':''}`}/>
+                  </div>
+                </div>
+              </div>
               <div className='resultado_conversao_title'>
                 <h3>
                   {Moeda_padrao} <MdOutlineArrowForwardIos size={16}/> {Moeda_convertida}

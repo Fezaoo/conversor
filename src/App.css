@@ -99,9 +99,36 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
     text-align: center;
     margin-top: 30px;
 }
+.resultado_title_container{
+    display: flex;
+    flex-direction: row;
+}
 .resultado_title{
     text-align: left;
     margin-bottom: 10px;
+}
+.loading_container_test {
+    margin: 2px 20px;
+}
+.loading_none{
+    display: none;
+}
+.loading{
+    display: inline;
+    animation: spin 1s linear infinite;
+    width: 16px;
+    height: 16px;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.loading_animation{
+    rotate: 180deg;
 }
 .resultado_conversao_container{
     display: flex;
